@@ -6,7 +6,7 @@ export const ContentAreaContainer = styled.section`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   z-index: 10;
   @media (max-width: 800px) {
@@ -16,7 +16,7 @@ export const ContentAreaContainer = styled.section`
 `;
 
 ContentAreaContainer.Item = styled.div`
-  width: 50%;
+  width: 49%;
   display: inline-block;
   margin-bottom: 50px;
   @media (max-width: 800px) {
