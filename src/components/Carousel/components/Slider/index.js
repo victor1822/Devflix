@@ -26,6 +26,14 @@ const Container = styled.ul`
   .slick-next {
     right: 16px;
   }
+
+  .slick-dots li button:before {
+    color: ${props=>props.cor};
+  }
+
+  .slick-prev:before, .slick-next:before{
+  color: ${props=>props.cor};
+  }
 `;
 
 export const SliderItem = styled.li`
@@ -39,18 +47,18 @@ export const SliderItem = styled.li`
 `;
 
 
-const Slider = ({ children }) => (
-  <Container>
+const Slider = (props) => (
+  <Container cor={props.cor}>
     <SlickSlider {...{
-      dots: false,
-      infinite: false,
+      dots: true,
+      infinite: true,
       speed: 300,
       centerMode: false,
       variableWidth: true,
       adaptiveHeight: true,
     }}
     >
-      {children}
+      {props.children}
     </SlickSlider>
   </Container>
 );
