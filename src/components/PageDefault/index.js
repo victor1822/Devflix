@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from '../Menu';
 import Footer from '../Footer';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Main = styled.main`
     background-color: #000;
@@ -10,6 +10,10 @@ const Main = styled.main`
     margin-left: 5%;
     margin-right: 5%;
     padding-bottom: 15px;
+    ${({marginAll}) => css`
+        margin-left: ${marginAll};
+        margin-right: ${marginAll};
+    `}
 `;
 
 const Container = styled.div`
@@ -19,11 +23,11 @@ const Container = styled.div`
     background-color: #000;
 `;
 
-function PageDefault({ children }){
+function PageDefault({ children, marginAll }){
     return(
         <Container>
             <Menu />
-                <Main>
+                <Main marginAll={marginAll}>
                     {children}
                 </Main>
             <Footer />

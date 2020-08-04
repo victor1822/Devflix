@@ -1,48 +1,54 @@
-import React from 'react';
-import DadosIniciais from '../../data/dados_iniciais.json';
+import React, { useEffect, useState } from 'react';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import PageDefault from '../../components/PageDefault'
+import PageDefault from '../../components/PageDefault';
+import categoriasRepository from '../../repositories/categorias';
 
 function Home() {
+  const [DadosIniciais, setDadosIniciais] = useState([]);
+
+  useEffect(() => {
+    categoriasRepository.getAllWithVideos()
+      .then((categoriasComVideos) => {
+        setDadosIniciais(categoriasComVideos);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
   return (
-    <div style={{backgroundColor: "#141414"}}>
-      <PageDefault style={{backgroundColor: "#141414"}}>
+    <PageDefault style={{ backgroundColor: '#141414' }} marginAll={0}>
 
-        <BannerMain
-        videoTitle={DadosIniciais.categorias[0].videos[0].titulo}
-        url={DadosIniciais.categorias[0].videos[0].url}
-        videoDescription={"Atualizei minhas definições de Programador Júnior, Pleno e Sênior para 2020. Esta é a primeira vez que eu fico em paz com o assunto porque classificar em níveis um desenvolvedor de software é algo complicado, com centenas de dimensões, principalmente quando levamos em conta o contexto que a pessoa está inserida. Então uma senioridade em programação é algo realmente sofisticado, mas a simplicidade deste vídeo vem do fato de eu analisar apenas uma dimensão nessa história toda. Inclusive, seria extremamente proveitoso ver isso nas vagas de programador ou até nos currículos."}
-        />
+      {DadosIniciais.length === 0 && (<div>Loading...</div>)}
 
-        <Carousel
-        ignoreFirstVideo
-        category={DadosIniciais.categorias[0]}
-        />
+      {
+        DadosIniciais.map((categoria, indice)=>{
+          if(indice === 0){
+            return(
+              <div key={categoria.id}>
+                <BannerMain
+                  videoTitle={DadosIniciais[0].videos[0].titulo}
+                  url={DadosIniciais[0].videos[0].url}
+                  videoDescription="Atualizei minhas definições de Programador Júnior, Pleno e Sênior para 2020. Esta é a primeira vez que eu fico em paz com o assunto porque classificar em níveis um desenvolvedor de software é algo complicado, com centenas de dimensões, principalmente quando levamos em conta o contexto que a pessoa está inserida. Então uma senioridade em programação é algo realmente sofisticado, mas a simplicidade deste vídeo vem do fato de eu analisar apenas uma dimensão nessa história toda. Inclusive, seria extremamente proveitoso ver isso nas vagas de programador ou até nos currículos."
+                />
 
-        <Carousel
-        category={DadosIniciais.categorias[1]}
-        />
-
-        <Carousel
-        category={DadosIniciais.categorias[2]}
-        />
-
-        <Carousel
-        category={DadosIniciais.categorias[3]}
-        />
-
-        <Carousel
-        category={DadosIniciais.categorias[4]}
-        />
-
-        <Carousel
-        category={DadosIniciais.categorias[5]}
-        />
-
-      </PageDefault>
-
-    </div>
+                <Carousel
+                  ignoreFirstVideo
+                  category={DadosIniciais[0]}
+                />
+              </div>
+            );
+          }
+           return (
+               <Carousel
+                 key={categoria.id}
+                 category={categoria}
+               />
+             );
+         })
+      }
+    </PageDefault>
   );
 }
 
