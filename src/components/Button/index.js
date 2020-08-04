@@ -1,9 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Button = styled.button`
+    ${({width}) => css`
+        width: ${width};
+    `}
+    ${({height}) => css`
+        height: ${height};
+    `}
     color: var(--white);
-    border: 1px solid var(--white);
-    background-color: 1px solid var(--black);
+    background:  var(--primary);
     box-sizing: border-box;
     cursor: pointer;
     padding: 16px 24px;
@@ -15,23 +20,13 @@ const Button = styled.button`
     text-decoration: none;
     display: inline-block;
     transition: opacity .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     &:hover,
     &:focus {
     opacity: .5;
-  }
-  
-  @media (max-width: 800px) {
-    & {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--primary);
-      border-radius: 0;
-      border: 0;
-      text-align: center;
-    }
   }
 `;
 
