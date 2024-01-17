@@ -23,9 +23,9 @@ function Home() {
       {DadosIniciais.length === 0 && (<div>Loading...</div>)}
 
       {
-        DadosIniciais.map((categoria, indice)=>{
-          if(indice === 0){
-            return(
+        DadosIniciais.map((categoria, indice) => {
+          if (indice === 0) {
+            return (
               <div key={categoria.id}>
                 <BannerMain
                   videoTitle={DadosIniciais[0].videos[0].titulo}
@@ -40,13 +40,13 @@ function Home() {
               </div>
             );
           }
-           return (
-               <Carousel
-                 key={categoria.id}
-                 category={categoria}
-               />
-             );
-         })
+          return (
+            <Carousel
+              key={categoria.id}
+              category={categoria}
+            />
+          );
+        })
       }
     </PageDefault>
   );
