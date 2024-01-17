@@ -19,7 +19,9 @@
     "server": "node ./server.js",
     "dev": "concurrently \"react-scripts start\" \"npm run server\"",
     "start": "npm run server",
-    "build": "react-scripts build",
+    "build": "if [ \"$DEPLOYMENT_ENV\" = \"HEROKU\" ]; then npm run build:heroku; else npm run build:vercel; fi",
+    "build:vercel": "react-scripts build", // Your current build process
+    "build:heroku": "echo 'Heroku build process if any'", // Minimal build process for Heroku
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
