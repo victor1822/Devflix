@@ -20,6 +20,7 @@
     "dev": "concurrently \"react-scripts start\" \"npm run server\"",
     "start": "npm run server",
     "build": "react-scripts build",
+    "heroku-postbuild": "npm start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
